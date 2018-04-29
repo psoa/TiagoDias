@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Compra" representedClassName="Compra" syncable="YES" codeGenerationType="class">
+        <attribute name="cartao" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="valor" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="estado" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Estado" inverseName="compras" inverseEntity="Estado" syncable="YES"/>
+    </entity>
+    <entity name="Estado" representedClassName="Estado" syncable="YES" codeGenerationType="class">
+        <attribute name="imposto" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="compras" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Compra" inverseName="estado" inverseEntity="Compra" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Estado" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Compra" positionX="-54" positionY="9" width="128" height="105"/>
+    </elements>
+</model>
