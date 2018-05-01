@@ -13,12 +13,13 @@
 		75C68E3620953F2B00CEB3F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E3420953F2B00CEB3F3 /* LaunchScreen.storyboard */; };
 		75C68E4220960ABE00CEB3F3 /* ComprasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E4120960ABE00CEB3F3 /* ComprasTableViewController.swift */; };
 		75C68E4520960EB700CEB3F3 /* ComprasTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E4420960EB700CEB3F3 /* ComprasTableViewCell.swift */; };
-		75C68E472096342B00CEB3F3 /* ProdutoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E462096342B00CEB3F3 /* ProdutoViewController.swift */; };
-		75C68E4A2096455400CEB3F3 /* AjustesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E492096455400CEB3F3 /* AjustesTableViewController.swift */; };
+		75C68E472096342B00CEB3F3 /* CompraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E462096342B00CEB3F3 /* CompraViewController.swift */; };
+		75C68E4A2096455400CEB3F3 /* AjustesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E492096455400CEB3F3 /* AjustesViewController.swift */; };
 		75C68E4C2096466300CEB3F3 /* AjustesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E4B2096466300CEB3F3 /* AjustesTableViewCell.swift */; };
 		75C68E4E2096484200CEB3F3 /* TotalComprasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E4D2096484200CEB3F3 /* TotalComprasViewController.swift */; };
 		75C68E522096506700CEB3F3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E512096506700CEB3F3 /* Settings.bundle */; };
 		75C68E552096547200CEB3F3 /* ComprasUSA.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E532096547200CEB3F3 /* ComprasUSA.xcdatamodeld */; };
+		75C68E5B209686D200CEB3F3 /* UIViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E5A209686D200CEB3F3 /* UIViewController+CoreData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,12 +31,13 @@
 		75C68E3720953F2B00CEB3F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75C68E4120960ABE00CEB3F3 /* ComprasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprasTableViewController.swift; sourceTree = "<group>"; };
 		75C68E4420960EB700CEB3F3 /* ComprasTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComprasTableViewCell.swift; sourceTree = "<group>"; };
-		75C68E462096342B00CEB3F3 /* ProdutoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdutoViewController.swift; sourceTree = "<group>"; };
-		75C68E492096455400CEB3F3 /* AjustesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjustesTableViewController.swift; sourceTree = "<group>"; };
+		75C68E462096342B00CEB3F3 /* CompraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompraViewController.swift; sourceTree = "<group>"; };
+		75C68E492096455400CEB3F3 /* AjustesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjustesViewController.swift; sourceTree = "<group>"; };
 		75C68E4B2096466300CEB3F3 /* AjustesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AjustesTableViewCell.swift; sourceTree = "<group>"; };
 		75C68E4D2096484200CEB3F3 /* TotalComprasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalComprasViewController.swift; sourceTree = "<group>"; };
 		75C68E512096506700CEB3F3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		75C68E542096547200CEB3F3 /* ComprasUSA.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ComprasUSA.xcdatamodel; sourceTree = "<group>"; };
+		75C68E5A209686D200CEB3F3 /* UIViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+CoreData.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,8 @@
 		75C68E2820953F2B00CEB3F3 /* TiagoDias */ = {
 			isa = PBXGroup;
 			children = (
+				75C68E592096868500CEB3F3 /* extensions */,
+				75C68E562096793400CEB3F3 /* imagens */,
 				75C68E48209644EE00CEB3F3 /* Ajustes */,
 				75C68E4320960E3C00CEB3F3 /* Compras */,
 				75C68E2920953F2B00CEB3F3 /* AppDelegate.swift */,
@@ -86,7 +90,7 @@
 			children = (
 				75C68E4120960ABE00CEB3F3 /* ComprasTableViewController.swift */,
 				75C68E4420960EB700CEB3F3 /* ComprasTableViewCell.swift */,
-				75C68E462096342B00CEB3F3 /* ProdutoViewController.swift */,
+				75C68E462096342B00CEB3F3 /* CompraViewController.swift */,
 				75C68E4D2096484200CEB3F3 /* TotalComprasViewController.swift */,
 			);
 			path = Compras;
@@ -95,10 +99,25 @@
 		75C68E48209644EE00CEB3F3 /* Ajustes */ = {
 			isa = PBXGroup;
 			children = (
-				75C68E492096455400CEB3F3 /* AjustesTableViewController.swift */,
+				75C68E492096455400CEB3F3 /* AjustesViewController.swift */,
 				75C68E4B2096466300CEB3F3 /* AjustesTableViewCell.swift */,
 			);
 			path = Ajustes;
+			sourceTree = "<group>";
+		};
+		75C68E562096793400CEB3F3 /* imagens */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = imagens;
+			sourceTree = "<group>";
+		};
+		75C68E592096868500CEB3F3 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				75C68E5A209686D200CEB3F3 /* UIViewController+CoreData.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,10 +192,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75C68E4A2096455400CEB3F3 /* AjustesTableViewController.swift in Sources */,
+				75C68E4A2096455400CEB3F3 /* AjustesViewController.swift in Sources */,
 				75C68E4520960EB700CEB3F3 /* ComprasTableViewCell.swift in Sources */,
 				75C68E4220960ABE00CEB3F3 /* ComprasTableViewController.swift in Sources */,
-				75C68E472096342B00CEB3F3 /* ProdutoViewController.swift in Sources */,
+				75C68E5B209686D200CEB3F3 /* UIViewController+CoreData.swift in Sources */,
+				75C68E472096342B00CEB3F3 /* CompraViewController.swift in Sources */,
 				75C68E4E2096484200CEB3F3 /* TotalComprasViewController.swift in Sources */,
 				75C68E552096547200CEB3F3 /* ComprasUSA.xcdatamodeld in Sources */,
 				75C68E2A20953F2B00CEB3F3 /* AppDelegate.swift in Sources */,

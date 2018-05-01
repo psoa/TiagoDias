@@ -10,6 +10,9 @@ import UIKit
 
 class AjustesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var lbEstado: UILabel!
+    @IBOutlet weak var lbImposto: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
