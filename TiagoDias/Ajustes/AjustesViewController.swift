@@ -17,7 +17,12 @@ enum EstadoEditMode {
 class AjustesViewController: UIViewController {
 
     
-    @IBOutlet weak var estadosTableView: UITableView!
+    @IBOutlet weak var ajustesTableView: UITableView!
+    @IBOutlet weak var tfCotacao: UITextField!
+    @IBOutlet weak var tfIOF: UITextField!
+    
+    
+    
     // MARK: - Properties
     
     var dataSource: [Estado] = []
@@ -29,7 +34,7 @@ class AjustesViewController: UIViewController {
         fetchRequest.sortDescriptors = [sortDescriptor]
         do {
             dataSource = try context.fetch(fetchRequest)
-            estadosTableView.reloadData()
+            ajustesTableView.reloadData()
         } catch {
             print(error.localizedDescription)
         }
@@ -52,7 +57,7 @@ class AjustesViewController: UIViewController {
     
     
     func showAlert(type: EstadoEditMode, estado: Estado?) {
-        let title = (type == .add) ? "Adicionar Estado" : "Editar Estado"
+        let title = (type == .add) ? "Adicionar" : "Editar"
         let alert = UIAlertController(title: "\(title) Estado", message: nil, preferredStyle: .alert)
         alert.addTextField { (textField: UITextField) in
             textField.placeholder = "Nome do estado"
@@ -99,16 +104,18 @@ extension AjustesViewController: UITableViewDelegate {
             self.context.delete(estado)
             try! self.context.save()
             self.dataSource.remove(at: indexPath.row)
-            self.estadosTableView.deleteRows(at: [indexPath], with: .fade)
+            self.ajustesTableView.deleteRows(at: [indexPath], with: .fade)
         }
+
+        return [deleteAction]
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let estado = self.dataSource[indexPath.row]
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Editar") { (action: UITableViewRowAction, indexPath: IndexPath) in
-            let estado = self.dataSource[indexPath.row]
-            tableView.setEditing(false, animated: true)
-            self.showAlert(type: .update, estado: estado)
-        }
-        editAction.backgroundColor = .blue
-        return [editAction, deleteAction]
+        showAlert(type: .update, estado: estado)
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
 
@@ -129,6 +136,6 @@ extension AjustesViewController: UITableViewDataSource {
 
 extension AjustesViewController: NSFetchedResultsControllerDelegate {
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        estadosTableView.reloadData()
+        ajustesTableView.reloadData()
     }
 }
