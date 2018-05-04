@@ -50,6 +50,11 @@ class AjustesViewController: UIViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        tfCotacao.text = String(UserDefaults.standard.integer(forKey: "cotacao"))
+        tfIOF.text = String(UserDefaults.standard.integer(forKey: "IOF"))
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

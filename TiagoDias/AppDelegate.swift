@@ -23,8 +23,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let appDefaults: [String: Any] = ["cotacao": "Clean", "IOF": true]
-        UserDefaults.standard.register(defaults: appDefaults)
+        if UserDefaults.standard.double(forKey: "cotacao") == 0 {
+            UserDefaults.standard.set(3.2, forKey: "cotacao")
+        }
+        
+        if UserDefaults.standard.double(forKey: "IOF") == 0 {
+            UserDefaults.standard.set(6.38, forKey: "IOF")
+        }
+//        let appDefaults: [String: Any] = ["cotacao": "3.2", "IOF": "6.2"]
+//        UserDefaults.standard.register(defaults: appDefaults)
         return true
     }
 

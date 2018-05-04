@@ -10,15 +10,30 @@ import UIKit
 
 class ComprasTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var ivPoster: UIImageView!
+    @IBOutlet weak var lbNome: UILabel!
+    @IBOutlet weak var lbValor: UILabel!
+    
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
+    
+    func prepare(with compra: Compra) {
+        
+        lbNome.text = compra.nome
+        lbValor.text = String(compra.valor)
+        
+        if let image = compra.poster as? UIImage {
+            ivPoster.image = image
+        } else {
+            ivPoster.image = UIImage(named: "red-shopping-bag-md")
+        }
+    }
 }

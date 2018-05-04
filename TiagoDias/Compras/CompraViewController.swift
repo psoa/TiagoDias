@@ -11,8 +11,6 @@ import CoreData
 
 class CompraViewController: UIViewController {
 
-    
-    
     @IBOutlet weak var tfNome: UITextField!
     @IBOutlet weak var tfEstado: UITextField!
     @IBOutlet weak var tfValor: UITextField!
@@ -25,17 +23,29 @@ class CompraViewController: UIViewController {
     var compra: Compra!
     var smallImage: UIImage!
     var estadoPickerView: UIPickerView!
-    
-    
     var estadoDataSource: [Estado] = []
+    var ajusteImagem: Bool = false
+    
     // MARK:  Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadCompra()
         loadEstados()
         createEstadosPicker()
     }
 
     // MARK:  Methods
+
+    func loadEstados() {
+        let fetchRequest: NSFetchRequest<Estado> = Estado.fetchRequest()
+        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        do {
+            estadoDataSource = try context.fetch(fetchRequest)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     func createEstadosPicker() {
         estadoPickerView = UIPickerView() //Instanciando o UIPickerView
@@ -90,25 +100,25 @@ class CompraViewController: UIViewController {
     func loadCompra() {
         if compra != nil {
             tfNome.text = compra.nome
-            //            tfEstado.text = compra.estado
-            tfValor.text = "(compra.valor)"
-            swCartao.isOn = compra.cartao
-            btAddUpdate.setTitle("Atualizar", for: .normal)
-            if let image = compra.poster as? UIImage {
-                ivPoster.image = image
+            tfValor.text = String(compra.valor)
+            
+            if let estado = compra.estado, let index = estadoDataSource.index(of: estado) {
+                tfEstado.text = compra.estado?.nome
+                estadoPickerView.selectRow(index, inComponent: 0, animated: false)
             }
-        }
-    }
-    
-    func loadEstados() {
-        let fetchRequest: NSFetchRequest<Estado> = Estado.fetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        do {
-            estadoDataSource = try context.fetch(fetchRequest)
-            //estadosTableView.reloadData()
-        } catch {
-            print(error.localizedDescription)
+            swCartao.setOn(compra.cartao, animated: false)
+            
+            if ajusteImagem == true {
+                ajusteImagem = false
+            } else {
+                if let image = compra.poster as? UIImage {
+                    ivPoster.image = image
+                } else {
+                    ivPoster.image = UIImage(named: "red-shopping-bag-md")
+                }
+            }
+            
+            btAddUpdate.setTitle("ATUALIZAR", for: .normal)
         }
     }
     
@@ -175,35 +185,43 @@ class CompraViewController: UIViewController {
             compra = Compra(context: context)
         }
         
-        if let nome = tfNome.text, let valor = tfValor.text, let estado = tfEstado.text  {
-            compra.nome  = nome
-            //compra.valor = Decimal(valor)!
-            //compra.estado = estado
-            compra.poster = ivPoster.image
-            compra.cartao = swCartao.isOn
-        } else {
-            //exibir alerta indicando que todos os campos sao obrigatorios
+        compra.nome = tfNome.text
+        compra.valor = Double(tfValor.text!)!
+        compra.poster = ivPoster.image
+        
+        if !tfEstado.text!.isEmpty {
+            let estado = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)]
+            compra.estado = estado
         }
+        compra.cartao = swCartao.isOn
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        navigationController?.popViewController(animated: true)
      }
 }
 
 // MARK: - UIImagePickerControllerDelegate
 extension CompraViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    //O método abaixo nos trará a imagem selecionada pelo usuário em seu tamanho original
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?) {
-        
-        //Iremos usar o código abaixo para criar uma versão reduzida da imagem escolhida pelo usuário
-        let smallSize = CGSize(width: 300, height: 280)
-        UIGraphicsBeginImageContext(smallSize)
-        image.draw(in: CGRect(x: 0, y: 0, width: smallSize.width, height: smallSize.height))
-        
-        //Atribuímos a versão reduzida da imagem à variável smallImage
-        smallImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        ivPoster.image = smallImage //Atribuindo a imagem à ivPoster
-        
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            //Iremos usar o código abaixo para criar uma versão reduzida da imagem escolhida pelo usuário
+            let smallSize = CGSize(width: 300, height: 280)
+            UIGraphicsBeginImageContext(smallSize)
+            image.draw(in: CGRect(x: 0, y: 0, width: smallSize.width, height: smallSize.height))
+            
+            //Atribuímos a versão reduzida da imagem à variável smallImage
+            smallImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            ivPoster.image = smallImage //Atribuindo a imagem à ivPoster
+        }
         //Aqui efetuamos o dismiss na UIImagePickerController, para retornar à tela anterior
         dismiss(animated: true, completion: nil)
     }
