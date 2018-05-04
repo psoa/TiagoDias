@@ -42,7 +42,6 @@ class ComprasTableViewController: UITableViewController {
         }
     }
     
-    
     func loadCompras() {
         let fetchRequest: NSFetchRequest<Compra> = Compra.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
