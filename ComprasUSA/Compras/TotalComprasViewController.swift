@@ -42,7 +42,7 @@ class TotalComprasViewController: UIViewController {
 
     func calcularTotais() {
         var totalDolar: Double = 0.0
-        var totalIof: Double = 0.0
+        var totalReal: Double = 0.0
         var imposto: Double = 0.0
         
         for compra in compras {
@@ -51,15 +51,19 @@ class TotalComprasViewController: UIViewController {
                 imposto = 1
             }
             
-            totalDolar += compra.valor + ((compra.valor * imposto) / 100)
+            let valorCompraImposto = compra.valor + ((compra.valor * imposto) / 100)
+            totalDolar += valorCompraImposto
+            
+            var valorCompraReal = valorCompraImposto * cotacao
             
             if compra.cartao {
-                totalIof += compra.valor
+                valorCompraReal = valorCompraReal + ((valorCompraReal * iof) / 100)
             }
+            totalReal += valorCompraReal
         }
         
         totalUS.text = String(totalDolar)
-        totalBRL.text = String((totalDolar * cotacao) + ((totalIof * cotacao * iof) / 100))
+        totalBRL.text = String(totalReal)
     }
     
     
