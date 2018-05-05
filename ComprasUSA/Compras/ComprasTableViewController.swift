@@ -11,8 +11,9 @@ import CoreData
 
 class ComprasTableViewController: UITableViewController {
 
+    
+    var dataSource: [Compra] = []
     var lbListaComprasVazia = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 22))
-    var fetchedResultController: NSFetchedResultsController<Compra>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class ComprasTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         lbListaComprasVazia.text = "Sua lista está vazia!"
         lbListaComprasVazia.textAlignment = .center
-        loadCompras()
+        //loadCompras()
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,51 +30,45 @@ class ComprasTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        tableView.reloadData()
+        loadCompras()
+        //tableView.reloadData()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier! == "editarCompraSegue" {
             let viewController = segue.destination as! CompraViewController
-            
-            if let result = fetchedResultController.fetchedObjects {
-                viewController.compra = result[tableView.indexPathForSelectedRow!.row]
-            }
+            viewController.compra = dataSource[tableView.indexPathForSelectedRow!.row]
         }
     }
     
     func loadCompras() {
+
         let fetchRequest: NSFetchRequest<Compra> = Compra.fetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "nome", ascending: true)
         
         fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        fetchedResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        fetchedResultController.delegate = self
-        
         do {
-            try fetchedResultController.performFetch()
+            dataSource = try context.fetch(fetchRequest)
+            tableView.reloadData()
         } catch {
             print(error.localizedDescription)
         }
     }
+    
+    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "compraCell", for: indexPath) as! ComprasTableViewCell
-        
-        guard let compra = fetchedResultController.fetchedObjects?[indexPath.row] else {
-            return cell
-        }
+        let compra = dataSource[indexPath.row]
         cell.prepare(with: compra)
         return cell
     }
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let count = fetchedResultController.fetchedObjects?.count ?? 0
+        let count = dataSource.count
         
         tableView.backgroundView = count == 0 ? lbListaComprasVazia : nil
         
@@ -82,20 +77,8 @@ class ComprasTableViewController: UITableViewController {
 }
 
 extension ComprasTableViewController: NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
-                    didChange anObject: Any, at indexPath: IndexPath?,
-                    for type: NSFetchedResultsChangeType,
-                    newIndexPath: IndexPath?) {
-        
-        switch type {
-        case .delete:
-            if let indexPath = indexPath {
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-            break
-        default:
-            tableView.reloadData()
-        }
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadData()
     }
 }
 

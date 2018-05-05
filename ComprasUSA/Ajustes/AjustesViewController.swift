@@ -146,6 +146,7 @@ extension AjustesViewController: UITableViewDelegate {
                 try self.context.save()
                 self.dataSource.remove(at: indexPath.row)
                 self.ajustesTableView.deleteRows(at: [indexPath], with: .fade)
+
             } catch {
                 print(error.localizedDescription)
             }
