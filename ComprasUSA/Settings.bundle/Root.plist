@@ -14,15 +14,15 @@
 			<key>Key</key>
 			<string>cotacao</string>
 		</dict>
-        <dict>
-            <key>Type</key>
-            <string>PSTextFieldSpecifier</string>
-            <key>Title</key>
-            <string>IOF (%)</string>
-            <key>Key</key>
-            <string>iof</string>
-        </dict>
-    </array>
+		<dict>
+			<key>Type</key>
+			<string>PSTextFieldSpecifier</string>
+			<key>Title</key>
+			<string>IOF (%)</string>
+			<key>Key</key>
+			<string>IOF</string>
+		</dict>
+	</array>
 	<key>Title</key>
 	<string></string>
 </dict>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7524F703209E1C1B001EC30B /* String+NumberFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7524F702209E1C1B001EC30B /* String+NumberFormat.swift */; };
 		75C68E2A20953F2B00CEB3F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E2920953F2B00CEB3F3 /* AppDelegate.swift */; };
 		75C68E3120953F2B00CEB3F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E2F20953F2B00CEB3F3 /* Main.storyboard */; };
 		75C68E3320953F2B00CEB3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E3220953F2B00CEB3F3 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7524F702209E1C1B001EC30B /* String+NumberFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+NumberFormat.swift"; sourceTree = "<group>"; };
 		75C68E2620953F2B00CEB3F3 /* TiagoDias.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TiagoDias.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75C68E2920953F2B00CEB3F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75C68E3020953F2B00CEB3F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				75C68E5A209686D200CEB3F3 /* UIViewController+CoreData.swift */,
+				7524F702209E1C1B001EC30B /* String+NumberFormat.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				75C68E4E2096484200CEB3F3 /* TotalComprasViewController.swift in Sources */,
 				75C68E552096547200CEB3F3 /* ComprasUSA.xcdatamodeld in Sources */,
 				75C68E2A20953F2B00CEB3F3 /* AppDelegate.swift in Sources */,
+				7524F703209E1C1B001EC30B /* String+NumberFormat.swift in Sources */,
 				75C68E4C2096466300CEB3F3 /* AjustesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

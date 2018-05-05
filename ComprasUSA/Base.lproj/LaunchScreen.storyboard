@@ -18,12 +18,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="red-shopping-bag-md" translatesAutoresizingMaskIntoConstraints="NO" id="g0y-Jb-gnr">
-                                <rect key="frame" x="16" y="59" width="343" height="588"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red-shopping-bag-md" translatesAutoresizingMaskIntoConstraints="NO" id="g0y-Jb-gnr">
+                                <rect key="frame" x="16" y="36" width="343" height="615"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="g0y-Jb-gnr" secondAttribute="trailing" constant="16" id="7BP-TF-7i9"/>
+                            <constraint firstItem="g0y-Jb-gnr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Pkq-A2-vPB"/>
+                            <constraint firstItem="g0y-Jb-gnr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="T8P-0l-aak"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="g0y-Jb-gnr" secondAttribute="bottom" constant="16" id="wCI-vg-6pV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>

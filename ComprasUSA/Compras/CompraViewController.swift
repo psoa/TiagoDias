@@ -59,15 +59,17 @@ class CompraViewController: UIViewController {
         estadoPickerView.delegate = self  //Definindo seu delegate
         estadoPickerView.dataSource = self  //Definindo seu dataSource
         
-        //        //Criando uma toobar que servirá de apoio ao pickerView. Através dela, o usuário poderá
-        //        //confirmar sua seleção ou cancelar
+        //Criando uma toobar que servirá de apoio ao pickerView. Através dela, o usuário poderá
+        //confirmar sua seleção ou cancelar
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 44))
         //
-        //        //O botão abaixo servirá para o usuário cancelar a escolha de gênero, chamando o método cancel
+        //
+        //O botão abaixo servirá para o usuário cancelar a escolha de gênero, chamando o método cancel
         let btCancel = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         let btSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         //
-        //        //O botão done confirmará a escolha do usuário, chamando o método done.
+        //
+        //O botão done confirmará a escolha do usuário, chamando o método done.
         let btDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(done))
         toolbar.items = [btCancel, btSpace, btDone]
         //Definindo a toolbar como view de apoio do textField (view que fica acima do teclado)
@@ -183,21 +185,45 @@ class CompraViewController: UIViewController {
 
         
     }
+    func campoObrigatorioAlert(missing info: String) {
+        //Criando o alerta que será apresentado ao usuário
+        let alert = UIAlertController(title: "Campo obrigatório"
+            , message: "Preencha a informação faltante ou inválida"
+            , preferredStyle: .actionSheet)
+        let okAction = UIAlertAction(title: info, style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func addUpdateCompras(_ sender: UIButton) {
         if compra == nil {
             compra = Compra(context: context)
         }
         
-        compra.nome = tfNome.text
-        compra.valor = Double(tfValor.text!)!
-        compra.poster = ivPoster.image
+        if let nome = tfNome.text, !nome.isEmpty {
+            compra.nome = tfNome.text
+        } else {
+            campoObrigatorioAlert(missing: "Nome do produto")
+            return
+        }
+        if let valor = tfValor.text?.doubleValue, valor >= 0 {
+            compra.valor = valor
+        } else {
+            campoObrigatorioAlert(missing: "Valor do produto")
+            return
+        }
+        
+        compra.poster = ivPoster.image //Já possui um valor padrão
         
         if !tfEstado.text!.isEmpty {
             let estado = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)]
             compra.estado = estado
+        } else {
+            campoObrigatorioAlert(missing: "Estado")
+            return
         }
-        compra.cartao = swCartao.isOn
+        
+        compra.cartao = swCartao.isOn //Já possui um valor padrão
         
         do {
             try context.save()

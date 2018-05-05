@@ -47,11 +47,11 @@ class AjustesViewController: UIViewController {
     
     func saveDefaultSettings() {
         
-        if let cotacao = Double(tfCotacao.text!), cotacao > 0 {
+        if let cotacao = tfCotacao.text?.doubleValue, cotacao > 0 {
             UserDefaults.standard.set(cotacao, forKey: "cotacao")
         }
         
-        if let iof = Double(tfIOF.text!), iof >  0 {
+        if let iof = tfIOF.text?.doubleValue, iof >  0 {
             UserDefaults.standard.set(iof, forKey: "IOF")
         }
     }
@@ -110,9 +110,12 @@ class AjustesViewController: UIViewController {
         }
         alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action: UIAlertAction) in
             let estado = estado ?? Estado(context: self.context)
-            if let imposto = alert.textFields?.last?.text, let nome = alert.textFields?.first?.text {
+            if let imposto = alert.textFields?.last?.text?.doubleValue,
+                let nome = alert.textFields?.first?.text,
+                !nome.isEmpty
+            {
                 estado.nome = nome
-                estado.imposto = Double(imposto)!
+                estado.imposto = imposto
                 do {
                     try self.context.save()
                     self.loadEstados()
@@ -139,9 +142,13 @@ extension AjustesViewController: UITableViewDelegate {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Excluir") { (action: UITableViewRowAction, indexPath: IndexPath) in
             let estado = self.dataSource[indexPath.row]
             self.context.delete(estado)
-            try! self.context.save()
-            self.dataSource.remove(at: indexPath.row)
-            self.ajustesTableView.deleteRows(at: [indexPath], with: .fade)
+            do {
+                try self.context.save()
+                self.dataSource.remove(at: indexPath.row)
+                self.ajustesTableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
 
         return [deleteAction]
