@@ -59,6 +59,7 @@ class AjustesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEstados()
+        loadDefaultSettings()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "refresh"), object: nil, queue: nil, using: {(notification) in
             self.loadDefaultSettings()
         })

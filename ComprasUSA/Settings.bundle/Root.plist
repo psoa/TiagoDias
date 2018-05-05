@@ -13,6 +13,10 @@
 			<string>Cotação do dolar</string>
 			<key>Key</key>
 			<string>cotacao</string>
+			<key>DefaultValue</key>
+			<string>3.2</string>
+			<key>KeyboardType</key>
+			<string>NumbersAndPunctuation</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -21,6 +25,10 @@
 			<string>IOF (%)</string>
 			<key>Key</key>
 			<string>IOF</string>
+			<key>DefaultValue</key>
+			<string>6.38</string>
+			<key>KeyboardType</key>
+			<string>NumbersAndPunctuation</string>
 		</dict>
 	</array>
 	<key>Title</key>
