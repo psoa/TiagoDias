@@ -40,24 +40,56 @@ class AjustesViewController: UIViewController {
         }
     }
     
+    func loadDefaultSettings() {
+        tfCotacao.text = String(UserDefaults.standard.double(forKey: "cotacao"))
+        tfIOF.text = String(UserDefaults.standard.double(forKey: "IOF"))
+    }
+    
+    func saveDefaultSettings() {
+        
+        if let cotacao = Double(tfCotacao.text!), cotacao > 0 {
+            UserDefaults.standard.set(cotacao, forKey: "cotacao")
+        }
+        
+        if let iof = Double(tfIOF.text!), iof >  0 {
+            UserDefaults.standard.set(iof, forKey: "IOF")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         loadEstados()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "refresh"), object: nil, queue: nil, using: {(notification) in
+            self.loadDefaultSettings()
+        })
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        tfCotacao.text = String(UserDefaults.standard.integer(forKey: "cotacao"))
-        tfIOF.text = String(UserDefaults.standard.integer(forKey: "IOF"))
+        super.viewWillAppear(animated)
+        loadDefaultSettings()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        saveDefaultSettings()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        
+        return(true)
+    }
+    
+    @objc func done() {
+        view.endEditing(true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     

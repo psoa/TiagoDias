@@ -29,9 +29,15 @@ class CompraViewController: UIViewController {
     // MARK:  Super Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadCompra()
-        loadEstados()
         createEstadosPicker()
+        createValorPad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadEstados()
+        loadCompra()
+
     }
 
     // MARK:  Methods
@@ -71,25 +77,23 @@ class CompraViewController: UIViewController {
         tfEstado.inputView = estadoPickerView
     }
     
-    
+    func createValorPad() {
+        let decimalPadToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 40))
+        let btFlexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let btDone = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneClicked))
+        decimalPadToolbar.items = [btFlexSpace, btDone]
+        tfValor.delegate = self
+        tfValor.inputAccessoryView = decimalPadToolbar
+    }
     
     //O método cancel irá esconder o teclado e não irá atribuir a seleção ao textField
     @objc func cancel() {
-        
-        //O método resignFirstResponder() faz com que o campo deixe de ter o foco, fazendo assim
-        //com que o teclado (pickerView) desapareça da tela
         estadoPickerResign()
     }
     
     //O método done irá atribuir ao textField a escolhe feita no pickerView
     @objc func done() {
-        
-        //Abaixo, recuperamos a linha selecionada na coluna (component) 0 (temos apenas um component
-        //em nosso pickerView)
         tfEstado.text = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)].nome
-
-        //Agora, gravamos esta escolha no UserDefaults
-        UserDefaults.standard.set(tfEstado.text!, forKey: "estado")
         estadoPickerResign()
     }
     
@@ -242,4 +246,12 @@ extension CompraViewController: UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return estadoDataSource.count
     }
+}
+
+extension CompraViewController: UITextFieldDelegate {
+    
+    @objc func doneClicked() {
+        view.endEditing(true)
+    }
+    
 }

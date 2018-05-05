@@ -54,7 +54,7 @@
 		75C68E1D20953F2B00CEB3F3 = {
 			isa = PBXGroup;
 			children = (
-				75C68E2820953F2B00CEB3F3 /* TiagoDias */,
+				75C68E2820953F2B00CEB3F3 /* ComprasUSA */,
 				75C68E2720953F2B00CEB3F3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,11 +67,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		75C68E2820953F2B00CEB3F3 /* TiagoDias */ = {
+		75C68E2820953F2B00CEB3F3 /* ComprasUSA */ = {
 			isa = PBXGroup;
 			children = (
 				75C68E592096868500CEB3F3 /* extensions */,
-				75C68E562096793400CEB3F3 /* imagens */,
 				75C68E48209644EE00CEB3F3 /* Ajustes */,
 				75C68E4320960E3C00CEB3F3 /* Compras */,
 				75C68E2920953F2B00CEB3F3 /* AppDelegate.swift */,
@@ -82,7 +81,7 @@
 				75C68E512096506700CEB3F3 /* Settings.bundle */,
 				75C68E532096547200CEB3F3 /* ComprasUSA.xcdatamodeld */,
 			);
-			path = TiagoDias;
+			path = ComprasUSA;
 			sourceTree = "<group>";
 		};
 		75C68E4320960E3C00CEB3F3 /* Compras */ = {
@@ -103,13 +102,6 @@
 				75C68E4B2096466300CEB3F3 /* AjustesTableViewCell.swift */,
 			);
 			path = Ajustes;
-			sourceTree = "<group>";
-		};
-		75C68E562096793400CEB3F3 /* imagens */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = imagens;
 			sourceTree = "<group>";
 		};
 		75C68E592096868500CEB3F3 /* extensions */ = {
@@ -345,7 +337,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TiagoDias/Info.plist;
+				INFOPLIST_FILE = ComprasUSA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -362,7 +354,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = TiagoDias/Info.plist;
+				INFOPLIST_FILE = ComprasUSA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

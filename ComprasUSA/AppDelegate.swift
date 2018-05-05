@@ -30,8 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if UserDefaults.standard.double(forKey: "IOF") == 0 {
             UserDefaults.standard.set(6.38, forKey: "IOF")
         }
-//        let appDefaults: [String: Any] = ["cotacao": "3.2", "IOF": "6.2"]
-//        UserDefaults.standard.register(defaults: appDefaults)
         return true
     }
 
