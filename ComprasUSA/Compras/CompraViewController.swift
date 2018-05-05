@@ -95,7 +95,10 @@ class CompraViewController: UIViewController {
     
     //O método done irá atribuir ao textField a escolhe feita no pickerView
     @objc func done() {
-        tfEstado.text = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)].nome
+        let pickerIndex = estadoPickerView.selectedRow(inComponent: 0)
+        if  -1 < pickerIndex && pickerIndex < estadoDataSource.count  {
+            tfEstado.text = estadoDataSource[pickerIndex].nome
+        }
         estadoPickerResign()
     }
     
@@ -252,6 +255,7 @@ extension CompraViewController: UIImagePickerControllerDelegate, UINavigationCon
             UIGraphicsEndImageContext()
             
             ivPoster.image = smallImage //Atribuindo a imagem à ivPoster
+            ajusteImagem = true
         }
         //Aqui efetuamos o dismiss na UIImagePickerController, para retornar à tela anterior
         dismiss(animated: true, completion: nil)

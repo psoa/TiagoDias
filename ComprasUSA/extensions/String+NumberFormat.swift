@@ -16,8 +16,4 @@ extension String {
     var doubleValue: Double? {
         return NumFormatter.instance.number(from: self)?.doubleValue
     }
-    
-    var integerValue: Int? {
-        return NumFormatter.instance.number(from: self)?.intValue
-    }
 }

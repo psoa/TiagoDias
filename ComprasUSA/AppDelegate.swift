@@ -23,11 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if UserDefaults.standard.double(forKey: "cotacao") == 0 {
+        if UserDefaults.standard.double(forKey: "cotacao") <= 0 {
             UserDefaults.standard.set(3.2, forKey: "cotacao")
         }
         
-        if UserDefaults.standard.double(forKey: "IOF") == 0 {
+        if UserDefaults.standard.double(forKey: "IOF") <= 0 {
             UserDefaults.standard.set(6.38, forKey: "IOF")
         }
         return true
