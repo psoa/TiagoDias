@@ -96,7 +96,8 @@ class CompraViewController: UIViewController {
     //O método done irá atribuir ao textField a escolhe feita no pickerView
     @objc func done() {
         let pickerIndex = estadoPickerView.selectedRow(inComponent: 0)
-        if  -1 < pickerIndex && pickerIndex < estadoDataSource.count  {
+        
+        if  pickerIndex > -1 && !estadoDataSource.isEmpty {
             tfEstado.text = estadoDataSource[pickerIndex].nome
         }
         estadoPickerResign()
@@ -132,34 +133,15 @@ class CompraViewController: UIViewController {
     }
     
     func selectPicture(sourceType: UIImagePickerControllerSourceType) {
-        //Criando o objeto UIImagePickerController
+
         let imagePicker = UIImagePickerController()
-        
-        //Definimos seu sourceType através do parâmetro passado
         imagePicker.sourceType = sourceType
-        
-        //Definimos a MovieRegisterViewController como sendo a delegate do imagePicker
         imagePicker.delegate = self
-        
-        //Apresentamos a imagePicker ao usuário
         present(imagePicker, animated: true, completion: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    
     // MARK: - IBActions
     @IBAction func addPoster(_ sender: UIButton) {
-        //Criando o alerta que será apresentado ao usuário
         let alert = UIAlertController(title: "Selecionar imagem", message: "De onde você quer escolher a imagem?", preferredStyle: .actionSheet)
         
         //Verificamos se o device possui câmera. Se sim, adicionamos a devida UIAlertAction
@@ -198,36 +180,52 @@ class CompraViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func addUpdateCompras(_ sender: UIButton) {
-        if compra == nil {
-            compra = Compra(context: context)
-        }
-        
+    func validateNome() -> Bool {
         if let nome = tfNome.text, !nome.isEmpty {
-            compra.nome = tfNome.text
-        } else {
+            return true
+        }
+        return false
+    }
+
+    func validateValor() -> Bool {
+        if let valor = tfValor.text?.doubleValue, valor > 0 {
+            return true
+        }
+        return false
+    }
+    
+    func validateEstado () -> Bool {
+        if  let strEstado = tfEstado.text, !strEstado.isEmpty {
+            return true
+        }
+        return false
+    }
+    
+    @IBAction func addUpdateCompras(_ sender: UIButton) {
+
+        if !validateNome() {
             campoObrigatorioAlert(missing: "Nome do produto")
             return
         }
-        if let valor = tfValor.text?.doubleValue, valor >= 0 {
-            compra.valor = valor
-        } else {
+        
+        if !validateValor() {
             campoObrigatorioAlert(missing: "Valor do produto")
             return
         }
         
-        compra.poster = ivPoster.image //Já possui um valor padrão
-        
-        if !tfEstado.text!.isEmpty {
-            let estado = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)]
-            compra.estado = estado
-        } else {
+        if !validateEstado () {
             campoObrigatorioAlert(missing: "Estado")
             return
         }
         
+        if compra == nil {
+            compra = Compra(context: context)
+        }
+        compra.valor = tfValor.text!.doubleValue!
+        compra.nome = tfNome.text
+        compra.estado = estadoDataSource[estadoPickerView.selectedRow(inComponent: 0)]
+        compra.poster = ivPoster.image //Já possui um valor padrão
         compra.cartao = swCartao.isOn //Já possui um valor padrão
-        
         do {
             try context.save()
         } catch {

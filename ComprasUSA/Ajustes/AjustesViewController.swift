@@ -58,7 +58,6 @@ class AjustesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadEstados()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "refresh"), object: nil, queue: nil, using: {(notification) in
             self.loadDefaultSettings()
         })
@@ -66,6 +65,7 @@ class AjustesViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadEstados()
         loadDefaultSettings()
     }
 
@@ -109,11 +109,12 @@ class AjustesViewController: UIViewController {
             }
         }
         alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action: UIAlertAction) in
-            let estado = estado ?? Estado(context: self.context)
+            
             if let imposto = alert.textFields?.last?.text?.doubleValue,
                 let nome = alert.textFields?.first?.text,
                 !nome.isEmpty
             {
+                let estado = estado ?? Estado(context: self.context)
                 estado.nome = nome
                 estado.imposto = imposto
                 do {

@@ -21,7 +21,6 @@ class ComprasTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         lbListaComprasVazia.text = "Sua lista está vazia!"
         lbListaComprasVazia.textAlignment = .center
-        //loadCompras()
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,7 +30,6 @@ class ComprasTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadCompras()
-        //tableView.reloadData()
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier! == "editarCompraSegue" {
@@ -63,15 +61,14 @@ class ComprasTableViewController: UITableViewController {
         cell.prepare(with: compra)
         return cell
     }
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        return 1
-//    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let count = dataSource.count
-        
         tableView.backgroundView = count == 0 ? lbListaComprasVazia : nil
-        
         return count
     }
 }
