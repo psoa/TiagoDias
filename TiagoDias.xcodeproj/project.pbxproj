@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		7524F703209E1C1B001EC30B /* String+NumberFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7524F702209E1C1B001EC30B /* String+NumberFormat.swift */; };
 		7524F706209FC4E0001EC30B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E3720953F2B00CEB3F3 /* Info.plist */; };
-		7524F707209FC4E4001EC30B /* TiagoDias.app in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E2620953F2B00CEB3F3 /* TiagoDias.app */; };
 		75C68E2A20953F2B00CEB3F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C68E2920953F2B00CEB3F3 /* AppDelegate.swift */; };
 		75C68E3120953F2B00CEB3F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E2F20953F2B00CEB3F3 /* Main.storyboard */; };
 		75C68E3320953F2B00CEB3F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75C68E3220953F2B00CEB3F3 /* Assets.xcassets */; };
@@ -178,7 +177,6 @@
 				75C68E522096506700CEB3F3 /* Settings.bundle in Resources */,
 				75C68E3620953F2B00CEB3F3 /* LaunchScreen.storyboard in Resources */,
 				75C68E3320953F2B00CEB3F3 /* Assets.xcassets in Resources */,
-				7524F707209FC4E4001EC30B /* TiagoDias.app in Resources */,
 				7524F706209FC4E0001EC30B /* Info.plist in Resources */,
 				75C68E3120953F2B00CEB3F3 /* Main.storyboard in Resources */,
 			);
